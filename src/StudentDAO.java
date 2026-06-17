@@ -26,7 +26,7 @@ public class StudentDAO {
             String query = "SELECT * FROM students";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            System.out.println("STUDENT DETAILS");
+            System.out.println("\nSTUDENT DETAILS");
             while(rs.next()){
                 System.out.println(
                     rs.getInt("id") + " " +
@@ -173,5 +173,28 @@ public class StudentDAO {
             System.out.println(e);
             return false;
         }
+    }
+    public boolean isValidName(String name){
+        name = name.trim();
+        if(name.isEmpty()){
+            System.out.println("Enter valid name!!");
+            return false;
+        }
+        return true;
+    }
+    public boolean isValidAge(int age){
+        if(age <= 0){
+            System.out.println("Enter valid age!!");
+            return false;
+        }
+        return true;
+    }
+    public boolean isValidCourse(String course){
+        course = course.trim();
+        if(course.isEmpty()){
+            System.out.println("Enter valid course name!!");
+            return false;
+        }
+        return true;
     }
 }

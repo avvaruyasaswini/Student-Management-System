@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
         StudentDAO dao = new StudentDAO();
         Scanner sc = new Scanner(System.in);
-        int choice;
+        int choice = 0;
         do{
             System.out.println("\nOPERATIONS");
             System.out.println("1. Add a student");
@@ -12,18 +12,15 @@ public class Main {
             System.out.println("4. Update student");
             System.out.println("5. Search student");
             System.out.println("6. Exit");
-            System.out.print("Enter choice: ");
-            choice = sc.nextInt();
+            choice = readValidInt(sc, "Enter choice: ");
             switch(choice){
                 case 1:
-                    System.out.println("Enter student name: ");
                     sc.nextLine();
-                    String name = sc.nextLine();
-                    System.out.println("Enter student age: ");
-                    int age = sc.nextInt();
-                    System.out.println("Enter course of the student: ");
+                    String name = readValidString(sc, "Enter student name: ");
+                    
+                    int age = readValidInt(sc, "Enter student age: ");
                     sc.nextLine();
-                    String course = sc.nextLine();
+                    String course = readValidString(sc, "Enter course name: ");
                     dao.addStudent(name, age, course);
                     break;
                 case 2:
@@ -39,8 +36,7 @@ public class Main {
                         break;
                     }
                     dao.readStudent();
-                    System.out.println("Enter student ID to delete: ");
-                    int id = sc.nextInt();
+                    int id = readValidInt(sc, "Enter student ID: ");
                     dao.deleteStudent(id);
                     break;
                 case 4:
@@ -49,8 +45,7 @@ public class Main {
                         break;
                     }
                     dao.readStudent();
-                    System.out.println("Enter student ID to update: ");
-                    int id1 = sc.nextInt();
+                    int id1 = readValidInt(sc, "Enter student ID: ");
                     if(!dao.studentExists(id1)){
                         System.out.println("Student not found");
                         break;
@@ -62,24 +57,24 @@ public class Main {
                         System.out.println("2. Age");
                         System.out.println("3. Course");
                         System.out.println("4. Exit");
-                        System.out.print("Enter choice: ");
-                        ch1 = sc.nextInt();
+                        ch1 = readValidInt(sc, "Enter choice: ");
                         switch(ch1){
                             case 1:
-                                System.out.println("Enter name to update: ");
                                 sc.nextLine();
-                                String name1 = sc.nextLine();
+                                String name1 = readValidString(sc, "Enter student name: ");
                                 dao.updateName(id1, name1);
                                 break;
                             case 2:
-                                System.out.println("Enter age to update: ");
-                                int age1 = sc.nextInt();
+                                int age1 = readValidInt(sc, "Enter student age: ");
+                                if(age1 <= 0){
+                                    System.out.println("Enter valid age!!");
+                                    break;
+                                }
                                 dao.updateAge(id1, age1);
                                 break;
                             case 3:
-                                System.out.println("Enter course to update: ");
                                 sc.nextLine();
-                                String course1 = sc.nextLine();
+                                String course1 = readValidString(sc, "Enter student course: ");
                                 dao.updateCourse(id1, course1);
                                 break;
                             case 4:
@@ -96,8 +91,7 @@ public class Main {
                         break;
                     }
                     dao.readStudent();
-                    System.out.println("Enter student ID to search: ");
-                    int id2 = sc.nextInt();
+                    int id2 = readValidInt(sc, "Enter student ID: ");
                     dao.searchStudentByID(id2);
                     break;
                 case 6:
@@ -108,5 +102,31 @@ public class Main {
             }
         }while(choice != 6);
         sc.close();
+    }
+    private static int readValidInt(Scanner sc, String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            if (!sc.hasNextInt()) {
+                System.out.println("Please enter a valid number!");
+                sc.nextLine();
+                continue;
+            }
+            int value = sc.nextInt();
+            if (value <= 0) {
+                System.out.println("Number must be greater than 0!");
+                continue;
+            }
+            return value;
+        }
+    }
+    private static String readValidString(Scanner sc, String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = sc.nextLine().trim();
+            if (!input.isEmpty()) {
+                return input;
+            }
+            System.out.println("Input cannot be empty!");
+        }
     }
 }
