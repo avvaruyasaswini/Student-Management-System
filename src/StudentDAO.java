@@ -2,15 +2,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 public class StudentDAO {
-    public void addStudent(String name, int age, String course){
+    public void addStudent(Student student){
         try{
             Connection con = DBConnection.getConnection();
             String query =
                 "INSERT INTO students(name, age, course) VALUES(?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, name);
-            ps.setInt(2, age);
-            ps.setString(3, course);
+            ps.setString(1, student.getName());
+            ps.setInt(2, student.getAge());
+            ps.setString(3, student.getCourse());
             ps.executeUpdate();
             System.out.println("Student added successfully");
             ps.close();
