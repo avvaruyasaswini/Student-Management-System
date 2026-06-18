@@ -28,12 +28,12 @@ public class StudentDAO {
             ResultSet rs = ps.executeQuery();
             System.out.println("\nSTUDENT DETAILS");
             while(rs.next()){
-                System.out.println(
-                    rs.getInt("id") + " " +
-                    rs.getString("name") + " " +
-                    rs.getInt("age") + " " +
-                    rs.getString("course")
-                );
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                String course = rs.getString("course");
+                Student student = new Student(id, name, age, course);
+                System.out.println(student);
             }
             rs.close();
             ps.close();
@@ -50,12 +50,12 @@ public class StudentDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                System.out.println(
-                    rs.getInt("id") + " " +
-                    rs.getString("name") + " " +
-                    rs.getInt("age") + " " +
-                    rs.getString("course")
-                );
+                int studentId = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                String course = rs.getString("course");
+                Student student = new Student(id, name, age, course);
+                System.out.println(student);
             }else{
                 System.out.println("Student not found!");
             }

@@ -35,6 +35,7 @@ public class Student {
     public void setCourse(String course){
         this.course = course;
     }
+    @Override
     public String toString(){
         String str = "ID: " + this.id + "\nName: " + this.name + "\nAge: " + this.age + "\nCourse: " + this.course;
         return str;
