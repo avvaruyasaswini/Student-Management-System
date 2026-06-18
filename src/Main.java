@@ -21,7 +21,7 @@ public class Main {
                     int age = readValidInt(sc, "Enter student age: ");
                     sc.nextLine();
                     String course = readValidString(sc, "Enter course name: ");
-                    dao.addStudent(name, age, course)Student student = new Student(name, age, course);
+                    Student student = new Student(name, age, course);
                     dao.addStudent(student);
                     break;
                 case 2:
