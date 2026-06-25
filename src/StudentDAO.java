@@ -30,7 +30,7 @@ public class StudentDAO {
                 Student student = new Student(id, name, age, course);
                 System.out.println(student);
             }
-        }catch(Exception e){
+        }catch(Exception e)
             System.out.println(e);
         }
     }
